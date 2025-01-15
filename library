@@ -133,7 +133,7 @@ end
 
 task.spawn(function()
 	while task.wait(Random.new():NextNumber(5 * 60, 10 * 60)) do
-		Notify("Enjoying this script?", "Join the discord at discord.gg/sS3tDP6FSB", "heart")
+		Notify("Enjoying this script?", "Waiting for update next time", "heart")
 	end
 end)
 
