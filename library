@@ -122,7 +122,7 @@ if not TeleportData then
 	return
 end
 
-if typeof(TeleportData) == "table" and TeleportData.AkbarkiddsRejoin then
+if typeof(TeleportData) == "table" and TeleportData.FrostByteRejoin then
 	return
 end
 
@@ -133,7 +133,7 @@ end
 
 task.spawn(function()
 	while task.wait(Random.new():NextNumber(5 * 60, 10 * 60)) do
-		Notify("Enjoying this script?", "Waiting for update next time", "heart")
+		Notify("Enjoying this script?", "Join the discord at discord.gg/sS3tDP6FSB", "heart")
 	end
 end)
 
@@ -141,11 +141,11 @@ Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/SiriusSoft
 local Flags = Rayfield.Flags
 
 getgenv().Rayfield = Rayfield
-local gameNamexxxxx = game.Name
+
 Window = Rayfield:CreateWindow({
-	Name = `Akbarkidds | {PlaceName} | {ScriptVersion or identifyexecutor()}`,
-	Icon = "alien",
-	LoadingTitle = "👽 Akbarkidds 👽 - "..gameNamexxxxx,
+	Name = `FrostByte | {PlaceName} | {ScriptVersion or identifyexecutor()}`,
+	Icon = "snowflake",
+	LoadingTitle = "❄ Brought to you by FrostByte ❄",
 	LoadingSubtitle = PlaceName,
 	Theme = "DarkBlue",
 
@@ -155,12 +155,12 @@ Window = Rayfield:CreateWindow({
 	ConfigurationSaving = {
 		Enabled = true,
 		FolderName = nil,
-		FileName = `Akbarkidds-{game.PlaceId}`
+		FileName = `FrostByte-{game.PlaceId}`
 	},
 
 	Discord = {
 		Enabled = true,
-		Invite = "Akbarkidds",
+		Invite = "sS3tDP6FSB",
 		RememberJoins = true
 	},
 })
@@ -254,7 +254,7 @@ function CreateUniversalTabs()
 	Tab:CreateButton({
 		Name = "⚙️ • Rejoin",
 		Callback = function()
-			game:GetService("TeleportService"):Teleport(game.PlaceId, Player, {AkbarkiddsRejoin = true})
+			game:GetService("TeleportService"):Teleport(game.PlaceId, Player, {FrostByteRejoin = true})
 		end,
 	})
 	
@@ -342,8 +342,40 @@ function CreateUniversalTabs()
 		end,
 	})]]
 	
+	Tab:CreateSection("Discord")
+	
+	Tab:CreateLabel("Suggestions & Bug Reports were moved to the Discord")
+	
 	Tab:CreateDivider()
-
+	
+	Tab:CreateButton({
+		Name = if request or setclipboard then "❄ • Join the FrostByte Discord!" else "https://discord.gg/sS3tDP6FSB",
+		Callback = function()
+			if request then
+				request({
+					Url = 'http://127.0.0.1:6463/rpc?v=1',
+					Method = 'POST',
+					Headers = {
+						['Content-Type'] = 'application/json',
+						Origin = 'https://discord.com'
+					},
+					Body = HttpService:JSONEncode({
+						cmd = 'INVITE_BROWSER',
+						nonce = HttpService:GenerateGUID(false),
+						args = {code = 'sS3tDP6FSB'}
+					})
+				})
+			elseif setclipboard then
+				setclipboard("https://discord.gg/sS3tDP6FSB")
+				Notify("Success!", "Copied Discord Link to Clipboard.")
+			end
+			
+			Notify("Discord", "https://discord.gg/sS3tDP6FSB")
+		end,
+	})
+	
+	Tab:CreateLabel("https://discord.gg/sS3tDP6FSB", "snowflake")
+	
 	Rayfield:LoadConfiguration()
 end
 
